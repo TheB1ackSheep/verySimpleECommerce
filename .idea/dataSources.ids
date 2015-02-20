@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Derby - sample;create=true@localhost" uuid="9ffeb976-a30e-4167-b303-db02fef02fd8">
+    <database-info product="Apache Derby" version="10.10.1.3 - (1557168)" jdbc-version="4.2" driver-name="Apache Derby Network Client JDBC Driver" driver-version="10.11.1.1 - (1616546)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact"/>
+    <schema name="APP" catalog=""/>
+    <table name="CUSTOMER" schema="APP" catalog="" type="TABLE">
+      <column name="CUSTOMER_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="DISCOUNT_CODE" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="ZIP" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="NAME" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ADDRESSLINE1" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ADDRESSLINE2" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CITY" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="STATE" sqlType="CHAR" precision="2" scale="0" nullable="true" jdbcType="1"/>
+      <column name="PHONE" sqlType="CHAR" precision="12" scale="0" nullable="true" jdbcType="1"/>
+      <column name="FAX" sqlType="CHAR" precision="12" scale="0" nullable="true" jdbcType="1"/>
+      <column name="EMAIL" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CREDIT_LIMIT" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="SQL110524110828130" columns="CUSTOMER_ID"/>
+      <foreign-key name="FOREIGNKEY_DISCOUNT_CODE" columns="DISCOUNT_CODE" ref-table="DISCOUNT_CODE" ref-schema="APP" ref-catalog="" ref-columns="DISCOUNT_CODE" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FOREIGNKEY_ZIP" columns="ZIP" ref-table="MICRO_MARKET" ref-schema="APP" ref-catalog="" ref-columns="ZIP_CODE" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FOREIGNKEY_CUSTOMER_ID" table="PURCHASE_ORDER" schema="APP" catalog="" columns="CUSTOMER_ID"/>
+    </table>
+    <table name="DISCOUNT_CODE" schema="APP" catalog="" type="TABLE">
+      <column name="DISCOUNT_CODE" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="RATE" sqlType="DECIMAL" precision="4" scale="2" nullable="true" jdbcType="3"/>
+      <primary-key name="SQL110524110828740" columns="DISCOUNT_CODE"/>
+      <exported-key name="FOREIGNKEY_DISCOUNT_CODE" table="CUSTOMER" schema="APP" catalog="" columns="DISCOUNT_CODE"/>
+    </table>
+    <table name="MANUFACTURER" schema="APP" catalog="" type="TABLE">
+      <column name="MANUFACTURER_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="NAME" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ADDRESSLINE1" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ADDRESSLINE2" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CITY" sqlType="VARCHAR" precision="25" scale="0" nullable="true" jdbcType="12"/>
+      <column name="STATE" sqlType="CHAR" precision="2" scale="0" nullable="true" jdbcType="1"/>
+      <column name="ZIP" sqlType="CHAR" precision="10" scale="0" nullable="true" jdbcType="1"/>
+      <column name="PHONE" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
+      <column name="FAX" sqlType="VARCHAR" precision="12" scale="0" nullable="true" jdbcType="12"/>
+      <column name="EMAIL" sqlType="VARCHAR" precision="40" scale="0" nullable="true" jdbcType="12"/>
+      <column name="REP" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="SQL110524110828930" columns="MANUFACTURER_ID"/>
+      <exported-key name="FOREIGNKEY_MANUFACTURER_ID" table="PRODUCT" schema="APP" catalog="" columns="MANUFACTURER_ID"/>
+    </table>
+    <table name="MICRO_MARKET" schema="APP" catalog="" type="TABLE">
+      <column name="ZIP_CODE" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="RADIUS" sqlType="DOUBLE" precision="52" scale="0" nullable="true" jdbcType="8"/>
+      <column name="AREA_LENGTH" sqlType="DOUBLE" precision="52" scale="0" nullable="true" jdbcType="8"/>
+      <column name="AREA_WIDTH" sqlType="DOUBLE" precision="52" scale="0" nullable="true" jdbcType="8"/>
+      <primary-key name="SQL110524110829280" columns="ZIP_CODE"/>
+      <exported-key name="FOREIGNKEY_ZIP" table="CUSTOMER" schema="APP" catalog="" columns="ZIP"/>
+    </table>
+    <table name="PRODUCT" schema="APP" catalog="" type="TABLE">
+      <column name="PRODUCT_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="MANUFACTURER_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="PRODUCT_CODE" sqlType="CHAR" precision="2" scale="0" nullable="false" jdbcType="1"/>
+      <column name="PURCHASE_COST" sqlType="DECIMAL" precision="12" scale="2" nullable="true" jdbcType="3"/>
+      <column name="QUANTITY_ON_HAND" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="MARKUP" sqlType="DECIMAL" precision="4" scale="2" nullable="true" jdbcType="3"/>
+      <column name="AVAILABLE" sqlType="VARCHAR" precision="5" scale="0" nullable="true" jdbcType="12"/>
+      <column name="DESCRIPTION" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="SQL110524110829970" columns="PRODUCT_ID"/>
+      <foreign-key name="FOREIGNKEY_MANUFACTURER_ID" columns="MANUFACTURER_ID" ref-table="MANUFACTURER" ref-schema="APP" ref-catalog="" ref-columns="MANUFACTURER_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FOREIGNKEY_PRODUCT_CODE" columns="PRODUCT_CODE" ref-table="PRODUCT_CODE" ref-schema="APP" ref-catalog="" ref-columns="PROD_CODE" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FOREIGNKEY_PRODUCT_ID" table="PURCHASE_ORDER" schema="APP" catalog="" columns="PRODUCT_ID"/>
+    </table>
+    <table name="PRODUCT_CODE" schema="APP" catalog="" type="TABLE">
+      <column name="PROD_CODE" sqlType="CHAR" precision="2" scale="0" nullable="false" jdbcType="1"/>
+      <column name="DISCOUNT_CODE" sqlType="CHAR" precision="1" scale="0" nullable="false" jdbcType="1"/>
+      <column name="DESCRIPTION" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="SQL110524110829750" columns="PROD_CODE"/>
+      <exported-key name="FOREIGNKEY_PRODUCT_CODE" table="PRODUCT" schema="APP" catalog="" columns="PRODUCT_CODE"/>
+    </table>
+    <table name="PURCHASE_ORDER" schema="APP" catalog="" type="TABLE">
+      <column name="ORDER_NUM" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CUSTOMER_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="PRODUCT_ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="QUANTITY" sqlType="SMALLINT" precision="5" scale="0" nullable="true" jdbcType="5"/>
+      <column name="SHIPPING_COST" sqlType="DECIMAL" precision="12" scale="2" nullable="true" jdbcType="3"/>
+      <column name="SALES_DATE" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="SHIPPING_DATE" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="FREIGHT_COMPANY" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="SQL110524110829500" columns="ORDER_NUM"/>
+      <foreign-key name="FOREIGNKEY_CUSTOMER_ID" columns="CUSTOMER_ID" ref-table="CUSTOMER" ref-schema="APP" ref-catalog="" ref-columns="CUSTOMER_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FOREIGNKEY_PRODUCT_ID" columns="PRODUCT_ID" ref-table="PRODUCT" ref-schema="APP" ref-catalog="" ref-columns="PRODUCT_ID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+  </data-source>
+</component>
